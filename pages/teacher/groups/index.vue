@@ -5,7 +5,7 @@
     <div class="flex mt-8">
       <GroupCard v-for="group in groups" :key="group.id" :group="group"/>
     </div>
-    <!-- <pre>{{groups}}</pre> -->
+    <pre>{{groups}}</pre>
   </div>
 </template>
 

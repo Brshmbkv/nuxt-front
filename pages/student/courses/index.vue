@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full flex flex-col space-y-4 p-4 lg:grid lg:grid-cols-3 lg:gap-4 lg:space-y-0">
+  <div class="flex flex-col space-y-4 p-4 lg:grid lg:grid-cols-3 lg:gap-4 lg:space-y-0">
     <CourseCard v-for="course in courses" :key="course.id" :course="course"/>
   </div>
 </template>

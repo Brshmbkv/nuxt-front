@@ -21,6 +21,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/axios.js',
     { src: "@/plugins/validation.js", ssr: true }
   ],
 
@@ -47,11 +48,12 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: "https://know.iitu.edu.kz/api"
+    //baseURL: "https://know.iitu.edu.kz/api"
+    baseURL: "http://glacial-everglades-84858.herokuapp.com/api"
   },
 
   auth: {
-    scopeKey: 'role',
+    scopeKey: 'user.role_name',
     strategies: {
       laravelJWT: {
         provider: "laravel/jwt",

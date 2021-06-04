@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col space-y-6 border px-8 py-4 rounded-xl bg-white lg:p-4 cursor-pointer"
+    class="flex flex-col space-y-6 shadow-md px-8 py-4 rounded-xl bg-white lg:p-4 cursor-pointer"
     @click.prevent="goToCourse(course.id)"
   >
     <div

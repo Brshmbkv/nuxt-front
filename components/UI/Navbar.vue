@@ -47,7 +47,8 @@
       <div class="flex items-center font-medium space-x-3">
         <div class="flex flex-col">
           <h3>{{userFullname}}</h3>
-          <span class="text-xs -mt-1">ID: {{user.id}}</span>
+          <span class="text-xs -mt-1">Role: {{user.role_name}}</span>
+          
         </div>
         <span class="h-8 w-0.5 bg-black"></span>
         <a @click.prevent="logout" class="font-medium cursor-pointer">Sign out</a>
