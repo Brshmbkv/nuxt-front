@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn-primary {
+  @apply px-6 py-2 bg-blue-600 shadow text-sm font-medium text-white rounded-md cursor-pointer transition hover:bg-blue-800 hover:shadow-md focus:outline-none;
+}
+
+.btn-primary-outline {
+  @apply px-6 py-2 border-2 border-blue-600 shadow text-sm font-medium text-blue-600 rounded-md cursor-pointer transition hover:bg-blue-100 hover:shadow-md focus:outline-none;
+}
