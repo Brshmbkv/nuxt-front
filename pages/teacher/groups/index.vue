@@ -1,11 +1,9 @@
 <template>
   <div>
     <p>Breadcrumbs</p>
-    <h1 class="text-3xl font-semibold">Groups page</h1>
-    <div class="flex mt-8">
+    <div class="flex flex-col space-y-4 mt-4 lg:grid lg:grid-cols-4 lg:space-y-0">
       <GroupCard v-for="group in groups" :key="group.id" :group="group"/>
     </div>
-    <pre>{{groups}}</pre>
   </div>
 </template>
 

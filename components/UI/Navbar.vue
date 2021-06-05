@@ -67,8 +67,7 @@ export default {
   },
   methods: {
     async logout() {
-      await this.$auth.logout();
-      this.$nuxt.refresh();
+      await this.$auth.logout()
     },
     toggleNav() {
       this.showMobileNav = !this.showMobileNav

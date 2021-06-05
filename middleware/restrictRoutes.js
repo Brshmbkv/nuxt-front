@@ -1,5 +1,6 @@
 const roles = ['пользователь', 'преподаватель']
 export default ({store, redirect, error, route}) => {
+  console.log('restrict middleware')
   if(!store.getters['isAuthenticated']) {
     return
   }

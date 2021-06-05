@@ -1,13 +1,15 @@
 <template>
-  <div class="flex justify-between  border px-4 py-4 space-x-24 h-40 cursor-pointer" @click="goToGroup(group.id)">
-    <div class="flex flex-col justify-between h-full">
-      <h1 class="text-2xl font-medium">{{group.name}}</h1>
-      <p class="text-lg">{{studentsCount}}</p>
-    </div>
-    <div class="flex flex-col h-full justify-around">
-      <template v-for="(course,index) in group.courses">
-        <p v-if="index<=2" :key="index">{{course.name}}</p>
-      </template>
+  <div class="flex flex-col space-y-2 px-8 py-4 shadow-md cursor-pointer" @click="goToGroup(group.id)">
+    <h2 class="text-xl font-semibold">{{group.name}}</h2>
+    <p class="text-gray-500 font-medium text-sm">{{group.description}}</p>
+    <p class="text-sm font-semibold">{{studentsCount}}</p>
+    <div class="border-t px-2 py-2">
+      <p class="text-gray-500 text-sm">Group courses</p>
+      <div class="flex flex-wrap gap-x-4">
+        <div v-for="(course, index) in group.courses" :key="index">
+          {{course.name}}
+        </div>
+      </div>
     </div>
   </div>
 </template>

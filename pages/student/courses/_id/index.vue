@@ -62,7 +62,7 @@
             @click="goToSchedule(exercise.id)"
             class="cursor-pointer border rounded-full px-4 py-0.5 transition hover:bg-gray-200"
           >
-            {{exercise.name}}
+            {{exercise.order}}
           </a>
         </div>  
         <div class="flex justify-between">
@@ -92,15 +92,11 @@ export default {
     };
   },
   async asyncData({ $axios, params, error }) {
-    try {
-      const { course, schedules } = await $axios.$get(`/courses/${params.id}`);
-      return {
-        course,
-        schedules
-      };
-    } catch (e) {
-      error({ message: e.response.statusText, statusCode: e.response.status });
-    }
+    const { course, schedules } = await $axios.$get(`/courses/${params.id}`);
+    return {
+      course,
+      schedules
+    };
   },
   methods: {
     goToSchedule(id) {
