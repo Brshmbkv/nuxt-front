@@ -2,7 +2,7 @@
   <div>
     <p>Breadcrumbs</p>
     <div class="flex justify-between">
-      <p>{{ results.user.first_name + " " + results.user.last_name }}</p>
+      <p>{{ results.user.full_name }}</p>
       <div>
         <p>{{ results.schedule.chapter.name }}</p>
         <p>{{ results.schedule.starts_at }}</p>

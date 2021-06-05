@@ -3,7 +3,7 @@
     <p>Breadcrums</p>
     <div class="flex justify-between items-center">
       <h1 class="text-2xl font-semibold">{{ group.name }}</h1>
-      <a @click="openSchedule(course.id, group.id)" class="btn-primary-outline"
+      <a @click="openSchedule(course.id)" class="btn-primary-outline"
         >Schedule</a
       >
     </div>
@@ -20,7 +20,7 @@
       <p class="text-gray-500">{{ course.description }}</p>
       <div class="overflow-x-auto shadow-md">
         <table class="min-w-full divide-y">
-          <thead class="text-left bg-gray-200">
+          <thead class="text-left bg-gray-300">
             <tr>
               <th class="px-6 py-3 font-semibold">Full name</th>
               <th class="px-6 py-3 font-semibold">Attendance</th>
@@ -77,12 +77,11 @@ export default {
       });
       this.tableData = res;
     },
-    openSchedule(courseId, groupId) {
+    openSchedule(courseId) {
       this.$router.push({
-        name: "teacher-schedules",
-        query: {
-          courseId,
-          groupId
+        name: "teacher-groups-id-schedules-course",
+        params: {
+          course: courseId
         }
       });
     }
