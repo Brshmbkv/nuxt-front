@@ -12,7 +12,7 @@
         <a
           class="font-medium border px-4 py-0.5 rounded-md cursor-pointer"
           @click="
-            getPracticeData($route.params.id);
+            getPracticeData();
             toggleTabs('practice');
           "
         >
@@ -71,7 +71,7 @@
               v-for="exercise in practice.exercises"
               :key="exercise.id"
               class="cursor-pointer hover:bg-gray-200"
-              @click="goToExercisesById($route.params.id, exercise.id)"
+              @click="goToExercisesById(exercise.id)"
             >
               <td class="px-6 py-3">{{ exercise.id }}</td>
               <td class="px-6 py-3">{{ exercise.name }}</td>
@@ -119,22 +119,22 @@ export default {
         value
       });
     },
-    async getPracticeData(id) {
+    async getPracticeData() {
       this.practice = await this.$nuxt.$axios.$get(
-        `/teacher/schedules/${id}/exercises`
+        `/teacher/schedules/${this.$route.params.schedule}/exercises`
       );
     },
     async goToUserResults(userId) {
       this.$router.push({
-        name: "teacher-groups-id-schedules-course-schedule-users-user-results",
-        params: { user: userId }
+        name: "teacher-schedules-schedule-users-id-results",
+        params: { id: userId }
       });
     },
-    async goToExercisesById(scheduleId, exerciseId) {
-      const res = await this.$nuxt.$axios.$get(
-        `/teacher/schedules/${scheduleId}/exercises/${exerciseId}`
-      );
-      console.log(res);
+    async goToExercisesById(exerciseId) {
+      this.$router.push({
+        name: "teacher-schedules-schedule-exercises-id",
+        params: {id: exerciseId}
+      })
     }
   }
 };

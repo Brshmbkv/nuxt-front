@@ -56,19 +56,19 @@ export default {
     };
   },
   async asyncData({ $axios, params }) {
-    const res = await $axios.$get(`/teacher/groups/${params.id}`);
+    const res = await $axios.$get(`/teacher/groups/${params.group}`);
     return {
       group: res,
       course: res.courses[0],
       tableData: await $axios.$get(
-        `/teacher/groups/${params.id}/courses/${res.courses[0].id}/students`
+        `/teacher/groups/${params.group}/courses/${res.courses[0].id}/students`
       )
     };
   },
   methods: {
     async changeCourse(id) {
       const res = await this.$nuxt.$axios.$get(
-        `/teacher/groups/${this.$route.params.id}/courses/${id}/students`
+        `/teacher/groups/${this.$route.params.group}/courses/${id}/students`
       );
       this.group.courses.forEach(course => {
         if (course.id === id) {
@@ -79,7 +79,7 @@ export default {
     },
     openSchedule(courseId) {
       this.$router.push({
-        name: "teacher-groups-id-schedules-course",
+        name: "teacher-groups-group-courses-course",
         params: {
           course: courseId
         }

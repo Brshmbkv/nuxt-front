@@ -45,7 +45,7 @@ export default {
   },
   async asyncData({ $axios, params }) {
     const res = await $axios.$get(
-      `/teacher/groups/${params.id}/courses/${params.course}/schedules`
+      `/teacher/groups/${params.group}/courses/${params.course}/schedules`
     );
     return {
       data: res
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     goToSchedule(id) {
-      this.$router.push({ name: "teacher-groups-id-schedules-course-schedule", params: { schedule: id } });
+      this.$router.push({ name: "teacher-schedules-schedule", params: { schedule: id } });
     }
   }
 };

@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     goToGroup(id) {
-      this.$router.push({name: 'teacher-groups-id', params: {id}})
+      this.$router.push({name: 'teacher-groups-group', params: {group: id}})
     }
   }
 }

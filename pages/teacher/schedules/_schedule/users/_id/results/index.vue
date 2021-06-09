@@ -97,7 +97,7 @@ export default {
   },
   async asyncData({ $axios, params }) {
     const res = await $axios.$get(
-      `/teacher/schedules/${params.id}/users/${params.user}/results`
+      `/teacher/schedules/${params.schedule}/users/${params.id}/results`
     );
     return {
       results: res
