@@ -1,5 +1,5 @@
 const colors = require('tailwindcss/colors')
-
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   mode: 'jit',
   purge: [],
@@ -9,6 +9,9 @@ module.exports = {
       colors: {
         cyan: colors.cyan,
         gray: colors.trueGray
+      },
+      fontFamily: {
+        body: ['Nunito', ...defaultTheme.fontFamily.sans]
       }
     }
   },

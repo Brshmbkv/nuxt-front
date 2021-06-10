@@ -19,7 +19,7 @@
             v-for="(item, index) in data.schedules"
             :key="item.id"
             @click="goToSchedule(item.id)"
-            class="cursor-pointer hover:bg-gray-200"
+            class="cursor-pointer hover:bg-gray-200 divide-x"
           >
             <td class="px-6 py-3">{{ index + 1 }}</td>
             <td class="px-6 py-3">{{ item.starts_at }}</td>

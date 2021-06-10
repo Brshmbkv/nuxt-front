@@ -1,4 +1,6 @@
 <template>
-  <Nuxt />
+  <div class="font-body">
+    <Nuxt />
+  </div>
 </template>
 

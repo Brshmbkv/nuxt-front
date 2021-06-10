@@ -1,98 +1,69 @@
 <template>
   <div>
-    <p>Breadcrumbs</p>
-    <div class="flex justify-between">
-      <p>{{ results.user.full_name }}</p>
+    <Breadcrumbs class="mb-2" />
+    <div class="flex items-center justify-between mb-4">
+      <p class="text-xl font-semibold">{{ results.user.full_name }}</p>
       <div>
-        <p>{{ results.schedule.chapter.name }}</p>
-        <p>{{ results.schedule.starts_at }}</p>
-      </div>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <td>Exercise</td>
-          <td>Submitted</td>
-          <td>Score</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="exercise in results.exercise_results"
-          :key="exercise.id"
-          @click="showModal(exercise.id)"
-        >
-          <td>{{ exercise.exercise.name }}</td>
-          <td>{{ exercise.updated_at }}</td>
-          <td>{{ exercise.score }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div v-if="isModalHidden">
-      <div
-        class="fixed inset-0 overflow-x-hidden overflow-y-auto z-50 flex justify-between items-center"
-      >
-        <div
-          class="flex flex-col mx-auto space-y-4 max-w-2xl px-10 py-4 bg-white"
-        >
-          <p class="text-2xl">{{ exercise.exercise.name }}</p>
-          <p class="px-4 py-2">{{ exercise.exercise.content }}</p>
-          <hr />
-          <p
-            class="px-4 py-2 border"
-            :class="{
-              'h-40 flex justify-center items-center': !exercise.value
-            }"
+        <p class="text-lg font-medium">{{ results.schedule.chapter.name }}</p>
+        <div class="flex items-center space-x-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            {{
-              !exercise.value
-                ? "There is no user's text answer!"
-                : exercise.value
-            }}
-          </p>
-          <div class="flex justify-between mx-8">
-            <div class="flex flex-col divide-y">
-              <a
-                v-for="file in exercise.attachments"
-                :key="file.id"
-                @click="download(file)"
-                class="cursor-pointer"
-              >
-                {{ file.name }}
-              </a>
-            </div>
-            <div class="flex items-center">
-              <input
-                class="border-l-0 border-r-0 border-t-0 text-2xl px-0 py-0"
-                type="number"
-                min="0"
-                max="100"
-                :value="exercise.score"
-                ref="score"
-              />
-            </div>
-          </div>
-          <div class="flex justify-end space-x-4 text-lg">
-            <button class="px-6 py-2 border font-medium bg-blue-600" @click="saveResult(exercise.id)">Save</button>
-            <button class="px-6 py-2 border font-medium bg-red-600" @click="hideModal">Cancel</button>
-          </div>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <p class="text-sm">{{ results.schedule.starts_at }}</p>
         </div>
       </div>
     </div>
-    <div
-      v-if="isModalHidden"
-      class="opacity-25 fixed inset-0 z-40 bg-black"
-    ></div>
+    <div class="overflow-x-auto shadow-md">
+      <table>
+        <thead class="bg-gray-300">
+          <tr>
+            <td>Exercise</td>
+            <td>Submitted</td>
+            <td>Score</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="exercise in results.exercise_results"
+            :key="exercise.id"
+            @click="toggleModal"
+            class="hover:bg-gray-200 cursor-pointer"
+          >
+            <td>{{ exercise.exercise.name }}</td>
+            <td>{{ exercise.updated_at }}</td>
+            <td>{{ exercise.score }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <Modal :showModal="modalStatus" @toggleModal="changeModalStatus"> </Modal>
   </div>
 </template>
 
 <script>
+import Modal from "@/components/UI/Modal";
+import Breadcrumbs from "@/components/UI/Breadcrumbs";
 export default {
+  components: {
+    Modal,
+    Breadcrumbs
+  },
   data() {
     return {
       results: [],
       exercise: {},
-      isModalHidden: false
+      modalStatus: false
     };
   },
   async asyncData({ $axios, params }) {
@@ -104,16 +75,11 @@ export default {
     };
   },
   methods: {
-    async showModal(id) {
-      this.isModalHidden = true;
-      this.results.exercise_results.forEach(i => {
-        if (i.id === id) {
-          this.exercise = i;
-        }
-      });
+    toggleModal() {
+      this.modalStatus = !this.modalStatus;
     },
-    hideModal() {
-      this.isModalHidden = false;
+    changeModalStatus(e){
+      this.modalStatus = e
     },
     async download(file) {
       await this.$nuxt
@@ -130,12 +96,12 @@ export default {
           fileLink.click();
         });
     },
-    async saveResult(id){
-      let formData = new FormData()
-      formData.append('id', id)
-      formData.append('score', this.$refs.score.value)
-      formData.append('schedule_id', this.$route.params.id)
-      await this.$nuxt.$axios.$post('teacher/results', formData)
+    async saveResult(id) {
+      let formData = new FormData();
+      formData.append("id", id);
+      formData.append("score", this.$refs.score.value);
+      formData.append("schedule_id", this.$route.params.id);
+      await this.$nuxt.$axios.$post("teacher/results", formData);
       this.$nuxt.refresh();
     }
   }

@@ -4,11 +4,11 @@
       <div
         class="flex items-center justify-center w-14 h-14 bg-blue-600 flex-none rounded-xl"
       >
-        <span class="text-white font-semibold text-lg tracking-wide">know</span>
+        <span class="text-white font-bold text-lg tracking-wide">know</span>
       </div>
       <div class="flex flex-col">
-        <h1 class="text-xl font-semibold truncate">know.iitu.edu.kz</h1>
-        <p class="text-xs font-medium">Enjoy Studying Online</p>
+        <h1 class="text-xl font-bold truncate">know.iitu.edu.kz</h1>
+        <p class="text-xs font-normal">Enjoy Studying Online</p>
       </div>
     </div>
     <nav
