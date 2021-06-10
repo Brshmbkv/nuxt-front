@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-2">
-    <p>Breadcrums</p>
+    <Breadcrumbs />
     <h1 class="text-2xl font-semibold">Schedule page</h1>
     <div class="overflow-x-auto shadow-md">
       <table class="min-w-full divide-y">
@@ -19,7 +19,7 @@
             v-for="(item, index) in data.schedules"
             :key="item.id"
             @click="goToSchedule(item.id)"
-            class="cursor-pointer hover:bg-gray-200 divide-x"
+            class="cursor-pointer transition hover:bg-gray-200"
           >
             <td class="px-6 py-3">{{ index + 1 }}</td>
             <td class="px-6 py-3">{{ item.starts_at }}</td>
@@ -37,7 +37,9 @@
 </template>
 
 <script>
+import Breadcrumbs from '~/components/UI/Breadcrumbs.vue';
 export default {
+  components: { Breadcrumbs },
   data() {
     return {
       data: ""

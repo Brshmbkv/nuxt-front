@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-2">
-    <p>Breadcrumbs</p>
+    <Breadcrumbs />
     <h1 class="text-2xl font-semibold">{{ data.chapter.name }}</h1>
     <div class="space-y-4">
       <div class="space-x-4">
@@ -70,7 +70,7 @@
             <tr
               v-for="exercise in practice.exercises"
               :key="exercise.id"
-              class="cursor-pointer hover:bg-gray-200"
+              class="cursor-pointer transition hover:bg-gray-200"
               @click="goToExercisesById(exercise.id)"
             >
               <td class="px-6 py-3">{{ exercise.id }}</td>
@@ -92,7 +92,9 @@
 </template>
 
 <script>
+import Breadcrumbs from '~/components/UI/Breadcrumbs.vue';
 export default {
+  components: { Breadcrumbs },
   data() {
     return {
       data: "",
@@ -120,9 +122,11 @@ export default {
       });
     },
     async getPracticeData() {
+      this.$nuxt.$loading.start()
       this.practice = await this.$nuxt.$axios.$get(
         `/teacher/schedules/${this.$route.params.schedule}/exercises`
       );
+      this.$nuxt.$loading.finish()
     },
     async goToUserResults(userId) {
       this.$router.push({

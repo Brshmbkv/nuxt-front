@@ -14,7 +14,7 @@
         <div class="flex justify-between items-center">
           <h1 class="font-semibold text-xl">know.iitu.edu.kz</h1>
           <button class="p-1" @click.prevent="toggleNav" type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -23,8 +23,11 @@
           <div>
             Signed in as <span class="font-medium">{{userFullname}}</span>
           </div>
-          <div class="flex flex-col font-medium">
-            links
+          <div v-if="user.role_name === 'Пользователь'" class="flex flex-col font-medium">
+            <NuxtLink :to="{name:'student-courses'}">Courses</NuxtLink>
+          </div>
+          <div v-else>
+            <NuxtLink :to="{name:'teacher-groups'}">Groups</NuxtLink>
           </div>
           <template v-if="isAuthenticated">
             <a class="py-0.5 font-medium cursor-pointer" @click.prevent="logout">Sign out</a>

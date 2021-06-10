@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-2">
-    <p>Breadcrums</p>
+    <Breadcrumbs />
     <div class="flex justify-between items-center">
       <h1 class="text-2xl font-semibold">{{ group.name }}</h1>
       <a @click="openSchedule(course.id)" class="btn-primary-outline"
@@ -47,7 +47,9 @@
 </template>
 
 <script>
+import Breadcrumbs from '~/components/UI/Breadcrumbs.vue';
 export default {
+  components: { Breadcrumbs },
   data() {
     return {
       group: [],

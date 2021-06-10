@@ -1,9 +1,9 @@
-const EXCEPTIONS = ['/', '/login', '/register']
+//This middleware give responsibility to guest users to go public routes
+import routes from '@/middleware/publicRoutes'
 
 export default function({store, redirect, route}) {
-  console.log('guest middleware')
   if(!store.getters['isAuthenticated']) {
-    if(EXCEPTIONS.includes(route.path)){
+    if(routes.includes(route.path)){
       return
     }
     return redirect({ name: 'login', query: {redirect: route.path}})

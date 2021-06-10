@@ -1,7 +1,11 @@
+import routes from '@/middleware/publicRoutes'
 const roles = ['пользователь', 'преподаватель']
-export default ({store, redirect, error, route}) => {
+export default ({store, error, route}) => {
   console.log('restrict middleware')
   if(!store.getters['isAuthenticated']) {
+    return
+  }
+  if(routes.includes(route.path)){
     return
   }
   const user = store.getters['user']
@@ -13,6 +17,6 @@ export default ({store, redirect, error, route}) => {
     return
   }
   else {
-    error({statusCode: 502, message: "Don't have access to this route!"})
+    error({statusCode: 502, message: "You don't have access to this route!"})
   }
 }

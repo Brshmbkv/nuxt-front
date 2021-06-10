@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Breadcrums: /Index/Schedule/{{ $route.params.id }}</p>
+    <Breadcrumbs />
     <h1 class="text-2xl font-medium my-1">{{ exercise.name }}</h1>
     <div
       v-if="exercise.attachment"
@@ -47,7 +47,7 @@
                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              <a class="font-medium cursor-pointer hover:text-gray-500">{{
+              <a class="font-medium cursor-pointer transition hover:text-gray-500">{{
                 file.name
               }}</a>
             </div>
@@ -72,14 +72,14 @@
         </div>
         <div class="w-1/2">
           <textarea class="w-full h-40 mb-2" placeholder="Text answer" ref="textInput"></textarea>
-          <a @click.prevent="submitTextAnswer(exercise.id)" class="px-6 py-1 cursor-pointer bg-gray-300 rounded-md">Save</a>
+          <a @click.prevent="submitTextAnswer(exercise.id)" class="btn-primary">Save</a>
         </div>
       </div>
-      <div class="border px-8 py-4">
+      <div v-if="exercise.result" class="border px-8 py-4">
         <h3 class="flex text-2xl justify-center font-light">Feedback</h3>
         <p>Status: {{exercise.result.status.text}}</p>
-        <p v-if="exercise.result.status.code === 1">Score: {{exercise.result.score}}%</p>
-        <p>Teacher commentary: {{exercise.result.comment}}</p>
+        <p v-if="exercise.result.status.code === 1">Grade: {{exercise.result.score}}%</p>
+        <p>Teacher commentary: <span class="font-semibold">{{exercise.result.comment}}</span></p>
       </div>
     </div>
   </div>
@@ -89,6 +89,7 @@
 import Tab from "@/components/UI/tabs/Tab.vue";
 import Tabs from "@/components/UI/tabs/Tabs.vue";
 import { mapGetters } from "vuex";
+import Breadcrumbs from '~/components/UI/Breadcrumbs.vue';
 export default {
   head() {
     return {
@@ -115,13 +116,13 @@ export default {
   },
   components: {
     Tab,
-    Tabs
+    Tabs,
+    Breadcrumbs
   },
   data() {
     return {
       exercise: {},
-      fileUploading: false,
-      textUploading: false
+      fileUploading: false
     };
   },
   async asyncData({ $axios, params }) {

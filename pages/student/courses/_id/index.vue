@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Breadcrumbs</p>
+    <Breadcrumbs />
     <h1 class="text-3xl font-semibold mb-2">{{ course.name }}</h1>
     <div class="flex space-x-2 mb-1">
       <svg
@@ -84,7 +84,9 @@
 </template>
 
 <script>
+import Breadcrumbs from '~/components/UI/Breadcrumbs.vue';
 export default {
+  components: { Breadcrumbs },
   data() {
     return {
       course: {},
